@@ -340,7 +340,7 @@ DebugPrintLevelEnabled (
       }                             \
     } while (FALSE)
 #else
-  #define ASSERT(Expression)
+  #define ASSERT(Expression) (VOID)(Expression)
 #endif
 
 /**
@@ -363,7 +363,7 @@ DebugPrintLevelEnabled (
       }                            \
     } while (FALSE)
 #else
-  #define DEBUG(Expression)
+  #define DEBUG(Expression) _DEBUG(Expression)
 #endif
 
 /**
@@ -389,7 +389,7 @@ DebugPrintLevelEnabled (
       }                                                                                  \
     } while (FALSE)
 #else
-  #define ASSERT_EFI_ERROR(StatusParameter)
+  #define ASSERT_EFI_ERROR(StatusParameter) (VOID)(StatusParameter)
 #endif
 
 /**
@@ -416,7 +416,7 @@ DebugPrintLevelEnabled (
       }                                                                 \
     } while (FALSE)
 #else
-  #define ASSERT_RETURN_ERROR(StatusParameter)
+  #define ASSERT_RETURN_ERROR(StatusParameter) (VOID)(StatusParameter)
 #endif
 
 /**
@@ -459,7 +459,7 @@ DebugPrintLevelEnabled (
       }                                                                                 \
     } while (FALSE)
 #else
-  #define ASSERT_PROTOCOL_ALREADY_INSTALLED(Handle, Guid)
+  #define ASSERT_PROTOCOL_ALREADY_INSTALLED(Handle, Guid) _ASSERT(1)
 #endif
 
 /**

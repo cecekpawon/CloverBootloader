@@ -11,17 +11,17 @@
 
 #include "lodepng.h"
 
+//#define DEBUG_VEC -1
+
+#ifndef DEBUG_VEC
 #ifndef DEBUG_ALL
-#define DEBUG_VEC 1
+#define DEBUG_VEC -1
 #else
 #define DEBUG_VEC DEBUG_ALL
 #endif
-
-#if DEBUG_VEC == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_VEC, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_VEC, __VA_ARGS__)
 
 #define TEST_MATH 0
 #define TEST_SVG_IMAGE 1

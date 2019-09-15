@@ -51,19 +51,17 @@
 #include "nvidia.h"
 #include "device_inject.h"
 
+//#define DEBUG_NVIDIA -1
+
 #ifndef DEBUG_NVIDIA
 #ifndef DEBUG_ALL
-#define DEBUG_NVIDIA 1
+#define DEBUG_NVIDIA -1
 #else
 #define DEBUG_NVIDIA DEBUG_ALL
 #endif
 #endif
 
-#if DEBUG_NVIDIA == 0
-#define DBG(...)
-#else
 #define DBG(...) DebugLog(DEBUG_NVIDIA, __VA_ARGS__)
-#endif
 
 CHAR8 generic_name[128];
 

@@ -10,19 +10,17 @@
 
 #include "Platform.h"
 
+//#define DEBUG_HIB -1
 
+#ifndef DEBUG_HIB
 #ifndef DEBUG_ALL
-#define DEBUG_HIB 1
+#define DEBUG_HIB -1
 #else
 #define DEBUG_HIB DEBUG_ALL
 #endif
-
-#if DEBUG_HIB == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_HIB, __VA_ARGS__);
-//#define DBG(...) AsciiPrint(__VA_ARGS__);
 #endif
+
+#define DBG(...) DebugLog(DEBUG_HIB, __VA_ARGS__)
 
 #define CREATE_NEW_BOOT_IMAGE 1
 

@@ -14,13 +14,17 @@
 #include "sse3_patcher.h"
 #include "sse3_5_patcher.h"
 
-#define KERNEL_DEBUG 0
+//#define KERNEL_DEBUG -1
 
-#if KERNEL_DEBUG
-#define DBG(...)    AsciiPrint(__VA_ARGS__);
+#ifndef KERNEL_DEBUG
+#ifndef DEBUG_ALL
+#define KERNEL_DEBUG -1
 #else
-#define DBG(...)
+#define KERNEL_DEBUG DEBUG_ALL
 #endif
+#endif
+
+#define DBG(...) DebugLog(KERNEL_DEBUG, __VA_ARGS__)
 
 // runtime debug
 #define DBG_RT(entry, ...)    if ((entry != NULL) && (entry->KernelAndKextPatches != NULL) && entry->KernelAndKextPatches->KPDebug) { AsciiPrint(__VA_ARGS__); }

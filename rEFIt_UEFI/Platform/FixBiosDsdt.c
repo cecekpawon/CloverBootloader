@@ -12,19 +12,17 @@
 #undef DBG
 #endif
 
+//#define DEBUG_FIX -1
+
 #ifndef DEBUG_FIX
 #ifndef DEBUG_ALL
-#define DEBUG_FIX 0
+#define DEBUG_FIX -1
 #else
 #define DEBUG_FIX DEBUG_ALL
 #endif
 #endif
 
-#if DEBUG_FIX==0
-#define DBG(...)
-#else
 #define DBG(...) DebugLog(DEBUG_FIX, __VA_ARGS__)
-#endif
 
 OPER_REGION *gRegions = NULL;
 
@@ -597,7 +595,7 @@ VOID CheckHardware()
   UINTN               display=0;
 
 
-  pci_dt_t            PCIdevice;
+  //pci_dt_t            PCIdevice;
   EFI_DEVICE_PATH_PROTOCOL *DevicePath = NULL;
 
    usb=0;
@@ -633,7 +631,7 @@ VOID CheckHardware()
         deviceid = Pci.Hdr.DeviceId | (Pci.Hdr.VendorId << 16);
 
         // add for auto patch dsdt get DSDT Device _ADR
-        PCIdevice.DeviceHandle = Handle;
+        //PCIdevice.DeviceHandle = Handle;
         DevicePath = DevicePathFromHandle (Handle);
         if (DevicePath) {
   //        DBG("Device patch = %s \n", DevicePathToStr(DevicePath));
@@ -641,14 +639,14 @@ VOID CheckHardware()
           //Display ADR
           if ((Pci.Hdr.ClassCode[2] == PCI_CLASS_DISPLAY) &&
               (Pci.Hdr.ClassCode[1] == PCI_CLASS_DISPLAY_VGA)) {
-#if DEBUG_FIX
+#if DEBUG_FIX >= 0
             UINT32 dadr1, dadr2;
 #endif
 //            PCI_IO_DEVICE *PciIoDevice;
 
             GetPciADR(DevicePath, &DisplayADR1[display], &DisplayADR2[display], NULL);
             DBG("VideoCard devID=0x%x\n", ((Pci.Hdr.DeviceId << 16) | Pci.Hdr.VendorId));
-#if DEBUG_FIX
+#if DEBUG_FIX >= 0
             dadr1 = DisplayADR1[display];
             dadr2 = DisplayADR2[display];
             DBG("DisplayADR1[%d] = 0x%x, DisplayADR2[%d] = 0x%x\n", display, dadr1, display, dadr2);

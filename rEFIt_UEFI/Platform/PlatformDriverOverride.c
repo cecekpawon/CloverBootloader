@@ -11,17 +11,17 @@
 #include "Platform.h"
 #include <Protocol/PlatformDriverOverride.h>
 
+//#define DEBUG_DRIVER_OVERRIDE -1
+
+#ifndef DEBUG_DRIVER_OVERRIDE
 #ifndef DEBUG_ALL
-#define DEBUG_PLO 1
+#define DEBUG_DRIVER_OVERRIDE -1
 #else
-#define DEBUG_PLO DEBUG_ALL
+#define DEBUG_DRIVER_OVERRIDE DEBUG_ALL
+#endif
 #endif
 
-#if DEBUG_PLO == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_PLO, __VA_ARGS__)
-#endif
+#define DBG(...) DebugLog(DEBUG_DRIVER_OVERRIDE, __VA_ARGS__)
 
 /** NULL terminated list of driver's handles that will be served by EFI_PLATFORM_DRIVER_OVERRIDE_PROTOCOL. */
 EFI_HANDLE  *mPriorityDrivers = NULL;
@@ -102,7 +102,7 @@ OurPlatformDriverLoaded (
   IN EFI_HANDLE                                     DriverImageHandle
   )
 {
-#if DEBUG_DRIVER_OVERRIDE
+#if DEBUG_DRIVER_OVERRIDE >= 0
   EFI_STATUS              Status;
   CHAR16                           *DriverName;
   EFI_COMPONENT_NAME_PROTOCOL      *CompName;

@@ -35,17 +35,17 @@
 
 #include "entry_scan.h"
 
+//#define DEBUG_SCAN_LEGACY -1
+
+#ifndef DEBUG_SCAN_LEGACY
 #ifndef DEBUG_ALL
-#define DEBUG_SCAN_LEGACY 1
+#define DEBUG_SCAN_LEGACY -1
 #else
 #define DEBUG_SCAN_LEGACY DEBUG_ALL
 #endif
-
-#if DEBUG_SCAN_LEGACY == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_SCAN_LEGACY, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_SCAN_LEGACY, __VA_ARGS__)
 
 
 static LEGACY_ENTRY * AddLegacyEntry(IN CHAR16 *FullTitle, IN CHAR16 *LoaderTitle, IN REFIT_VOLUME *Volume, IN EG_IMAGE *Image, IN EG_IMAGE *DriveImage, IN CHAR16 Hotkey, IN BOOLEAN CustomEntry)

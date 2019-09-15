@@ -21,17 +21,17 @@
 
 #include "Platform.h"
 
+//#define DEBUG_SMBIOS -1
+
+#ifndef DEBUG_SMBIOS
 #ifndef DEBUG_ALL
-#define DEBUG_SMBIOS 1
+#define DEBUG_SMBIOS -1
 #else
 #define DEBUG_SMBIOS DEBUG_ALL
 #endif
-
-#if DEBUG_SMBIOS == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_SMBIOS, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_SMBIOS, __VA_ARGS__)
 
 #define CPUID_EXTFEATURE_EM64T    _Bit(29)
 #define CPUID_EXTFEATURE_XD       _Bit(20)
@@ -2044,7 +2044,7 @@ VOID FinalizeSmbios() //continue
   EFI_PEI_HOB_POINTERS  HobStart;
   EFI_PHYSICAL_ADDRESS    *Table = NULL;
   //UINTN          TableLength = 0;
-  BOOLEAN FoundTable3 = FALSE;
+  //BOOLEAN FoundTable3 = FALSE;
 
   // Get Hob List
   HobStart.Raw = GetHobList ();
@@ -2058,7 +2058,7 @@ VOID FinalizeSmbios() //continue
         //TableLength = GET_GUID_HOB_DATA_SIZE (GuidHob);
         if (Table != NULL) {
           if (Index != 0) {
-            FoundTable3 = TRUE;
+            //FoundTable3 = TRUE;
             DBG("Found SMBIOS3 Table\n");
           }
           break;

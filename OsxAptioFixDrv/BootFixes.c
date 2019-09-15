@@ -809,7 +809,7 @@ UINTN
 FixBootingWithoutRelocBlock(UINTN bootArgs, BOOLEAN ModeX64)
 {
 	VOID					*pBootArgs = (VOID*)bootArgs;
-	BootArgs				*BA;
+	//BootArgs				*BA;
 	/*
 	UINTN					MemoryMapSize;
 	EFI_MEMORY_DESCRIPTOR	*MemoryMap;
@@ -821,7 +821,7 @@ FixBootingWithoutRelocBlock(UINTN bootArgs, BOOLEAN ModeX64)
 	
 	BootArgsPrint(pBootArgs);
 	
-	BA = GetBootArgs(pBootArgs);
+	//BA = GetBootArgs(pBootArgs);
 	
 	/*
 	 

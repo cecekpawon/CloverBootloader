@@ -42,17 +42,17 @@ CONST INTN SecureBootDef = 0;
 #include <Protocol/Security.h>
 #include <Protocol/Security2.h>
 
+//#define DEBUG_SECURE_BOOT -1
+
+#ifndef DEBUG_SECURE_BOOT
 #ifndef DEBUG_ALL
-#define DEBUG_SECURE_BOOT 1
+#define DEBUG_SECURE_BOOT -1
 #else
 #define DEBUG_SECURE_BOOT DEBUG_ALL
 #endif
-
-#if DEBUG_SECURE_BOOT == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_SECURE_BOOT, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_SECURE_BOOT, __VA_ARGS__)
 
 // Enable secure boot
 VOID EnableSecureBoot(VOID)

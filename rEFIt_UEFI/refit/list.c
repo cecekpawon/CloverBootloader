@@ -37,18 +37,17 @@
 #include "Platform.h"
 #include "list.h"
 
+//#define DEBUG_LIST -1
 
+#ifndef DEBUG_LIST
 #ifndef DEBUG_ALL
-#define DEBUG_LIST 1
+#define DEBUG_LIST -1
 #else
 #define DEBUG_LIST DEBUG_ALL
 #endif
-
-#if DEBUG_LIST == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_LIST, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_LIST, __VA_ARGS__)
 
 
 EFI_STATUS

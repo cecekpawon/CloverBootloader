@@ -30,17 +30,17 @@
 //Slice - rewrite for UEFI with more functions like Copyright (c) 2003 Apple Computer
 #include "Platform.h"
 
+//#define DEBUG_PLIST -1
+
+#ifndef DEBUG_PLIST
 #ifndef DEBUG_ALL
-#define DEBUG_PLIST 0
+#define DEBUG_PLIST -1
 #else
 #define DEBUG_PLIST DEBUG_ALL
 #endif
-
-#if DEBUG_PLIST == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_PLIST, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_PLIST, __VA_ARGS__)
 
 
 SymbolPtr gSymbolsHead = NULL;

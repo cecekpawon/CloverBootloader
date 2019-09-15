@@ -14,17 +14,17 @@ Copyright (c) 2006 JLA
 #include "LegacyBiosThunk.h"
 #include <Protocol/Bds.h>
 
+//#define DEBUG_LBOOT -1
+
+#ifndef DEBUG_LBOOT
 #ifndef DEBUG_ALL
-#define DEBUG_LBOOT 1
+#define DEBUG_LBOOT -1
 #else
 #define DEBUG_LBOOT DEBUG_ALL
 #endif
-
-#if DEBUG_LBOOT == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(0, __VA_ARGS__) // until a better solution is found, force DebugLog(0, ...) to prevent saving to DebugLog, which may cause legacy boot to fail
 #endif
+
+#define DBG(...) DebugLog(DEBUG_LBOOT, __VA_ARGS__)
 
 #pragma pack(push)
 #pragma pack(1)

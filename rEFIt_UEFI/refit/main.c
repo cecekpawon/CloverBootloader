@@ -41,17 +41,17 @@
 
 #include "Version.h"
 
+//#define DEBUG_MAIN -1
+
+#ifndef DEBUG_MAIN
 #ifndef DEBUG_ALL
-#define DEBUG_MAIN 1
+#define DEBUG_MAIN -1
 #else
 #define DEBUG_MAIN DEBUG_ALL
 #endif
-
-#if DEBUG_MAIN == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_MAIN, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_MAIN, __VA_ARGS__)
 
 #ifndef HIBERNATE
 #define HIBERNATE 0

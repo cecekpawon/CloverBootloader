@@ -24,23 +24,23 @@
 // don't inject REV, RBr and EPCI keys if gSettings.REV is zeroed
 //
 
-#ifndef DEBUG_ALL
-#define DEBUG_DH 1
-#else
-#define DEBUG_DH DEBUG_ALL
-#endif
-
-#if DEBUG_DH == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_DH, __VA_ARGS__)
-#endif
-
 
 #include "Platform.h"
 //#include "Version.h"
 
 #include <Guid/DataHubRecords.h>
+
+//#define DEBUG_DH -1
+
+#ifndef DEBUG_DH
+#ifndef DEBUG_ALL
+#define DEBUG_DH -1
+#else
+#define DEBUG_DH DEBUG_ALL
+#endif
+#endif
+
+#define DBG(...) DebugLog(DEBUG_DH, __VA_ARGS__)
 
 #define EFI_CPU_DATA_MAXIMUM_LENGTH 0x100
 

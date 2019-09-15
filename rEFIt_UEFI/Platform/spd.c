@@ -23,17 +23,13 @@
 
 #ifndef DEBUG_SPD
 #ifndef DEBUG_ALL
-#define DEBUG_SPD 0
+#define DEBUG_SPD -1
 #else
 #define DEBUG_SPD DEBUG_ALL
 #endif
 #endif
 
-#if DEBUG_SPD == 0
-#define DBG(...)
-#else
 #define DBG(...) DebugLog(DEBUG_SPD, __VA_ARGS__)
-#endif
 
 //extern EFI_DATA_HUB_PROTOCOL			*gDataHub;
 

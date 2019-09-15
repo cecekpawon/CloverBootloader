@@ -11,17 +11,17 @@
 #include "Platform.h"
 
 
+//#define DEBUG_BO -1
+
+#ifndef DEBUG_BO
 #ifndef DEBUG_ALL
-#define DEBUG_BO 1
+#define DEBUG_BO -1
 #else
 #define DEBUG_BO DEBUG_ALL
 #endif
-
-#if DEBUG_BO == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_BO, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_BO, __VA_ARGS__)
 
 
 #define BOOT_ORDER_VAR  L"BootOrder"

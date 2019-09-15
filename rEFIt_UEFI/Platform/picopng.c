@@ -35,17 +35,17 @@
 #define TEST 0
 #include "picopng.h"
 
+//#define DEBUG_PNG -1
+
+#ifndef DEBUG_PNG
 #ifndef DEBUG_ALL
-#define DEBUG_PNG 0
+#define DEBUG_PNG -1
 #else
 #define DEBUG_PNG DEBUG_ALL
 #endif
-
-#if DEBUG_PNG == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_PNG, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_PNG, __VA_ARGS__)
 
 
 

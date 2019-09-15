@@ -40,10 +40,10 @@
 
 #if DBG_TO == 2
 	#define DBG(...) AsciiPrint(__VA_ARGS__);
-#elif DBG_TO == 1
-	#define DBG(...) DebugPrint(1, __VA_ARGS__);
+//#elif DBG_TO == 1
+//	#define DBG(...) DebugPrint(1, __VA_ARGS__);
 #else
-	#define DBG(...)
+	#define DBG(...) DebugPrint(DBG_TO, __VA_ARGS__);
 #endif
 
 
@@ -479,7 +479,6 @@ PrintMemMap(
 {
 	UINTN					NumEntries;
 	UINTN					Index;
-	UINT64					Bytes;
 	EFI_MEMORY_DESCRIPTOR	*Desc;
 	
 	Desc = MemoryMap;
@@ -487,6 +486,7 @@ PrintMemMap(
 	DBG("MEMMAP: Size=%d, Addr=%p, DescSize=%d, DescVersion: 0x%x\n", MemoryMapSize, MemoryMap, DescriptorSize, DescriptorVersion);
 	DBG("Type       Start            End       VStart               # Pages          Attributes\n");
 	for (Index = 0; Index < NumEntries; Index++) {
+		UINT64	Bytes;
 		Bytes = (((UINTN) Desc->NumberOfPages) * EFI_PAGE_SIZE);
 		DBG("%-12s %lX-%lX %lX  %lX %lX\n",
 			EfiMemoryTypeDesc[Desc->Type],

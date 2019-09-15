@@ -34,17 +34,17 @@
 
 #include "entry_scan.h"
 
+//#define DEBUG_BOOT_SCREEN -1
+
+#ifndef DEBUG_BOOT_SCREEN
 #ifndef DEBUG_ALL
-#define DEBUG_BOOT_SCREEN 1
+#define DEBUG_BOOT_SCREEN -1
 #else
 #define DEBUG_BOOT_SCREEN DEBUG_ALL
 #endif
-
-#if DEBUG_BOOT_SCREEN == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_BOOT_SCREEN, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_BOOT_SCREEN, __VA_ARGS__)
 
 STATIC EG_PIXEL grayBackgroundPixel = { 0xBF, 0xBF, 0xBF, 0xFF };
 STATIC UINT8 grayAppleLogo[] = {

@@ -41,9 +41,9 @@ GetHobList (
   VOID
   )
 {
-  EFI_STATUS  Status;
-
   if (mHobList == NULL) {
+    EFI_STATUS  Status;
+
     Status = EfiGetSystemConfigurationTable (&gEfiHobListGuid, &mHobList);
     ASSERT_EFI_ERROR (Status);
     ASSERT (mHobList != NULL);

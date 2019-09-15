@@ -150,7 +150,8 @@ typedef struct NSVGclip
 #define kMaxIDLength 64
 #define kMaxTextLength 256
 
-typedef struct NSVGshape NSVGshape;
+//typedef struct NSVGshape NSVGshape;
+struct NSVGshape;
 
 typedef struct NSVGpattern {
   char id[64];

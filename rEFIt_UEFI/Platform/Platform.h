@@ -8,7 +8,68 @@ Headers collection for procedures
 // Set all debug options - apianti
 // Uncomment to set all debug options
 // Comment to use source debug options
-//#define DEBUG_ALL 2
+
+/*
+  Only impact to refit\*. Other drivers may have differences log attempt via memlog driver
+  installed or DebugLibs DebugPrint().
+
+  DebugLog() available DebugMode:
+    DebugMode  <0 do nothing, immediately return
+    DebugMode ==0 Prints to msg log, only output to log on SaveBooterLog
+    DebugMode ==1 Prints to msg log and DEBUG_LOG
+    DebugMode ==2 Prints to msg log, DEBUG_LOG and display console
+
+  We also can pass predefined debug value via build macro, ex: -DDEBUG_ALL=2
+
+  Please edit debug value here / via macro, instead of doing that in each file(s).
+*/
+
+//#define DEBUG_ALL             (2)
+
+#define DEBUG_AML               (-1)
+#define DEBUG_ATI               (-1)
+#define DEBUG_BO                (-1)
+#define DEBUG_BOOT_SCREEN       (-1)
+#define DEBUG_CARD_VLIST        (-1)
+#define DEBUG_COMMON_MENU       (-1)
+#define DEBUG_CPU               (-1)
+#define DEBUG_DH                (-1)
+#define DEBUG_DRIVER_OVERRIDE   (-1)
+#define DEBUG_EDID              (-1)
+#define DEBUG_FIX               (-1)
+#define DEBUG_GMA               (-1)
+#define DEBUG_HDA               (-1)
+#define DEBUG_HIB               (-1)
+#define DEBUG_ICNS              (-1)
+#define DEBUG_IMG               (-1)
+#define DEBUG_INJECT            (-1)
+#define DEBUG_LBOOT             (-1)
+#define DEBUG_LBTHUNK           (-1)
+#define DEBUG_LIB               (-1)
+#define DEBUG_LIST              (-1)
+#define DEBUG_LOCK_BOOT_SCREEN  (-1)
+#define DEBUG_MAC               (-1)
+#define DEBUG_MAIN              (-1)
+#define DEBUG_MENU              (-1)
+#define DEBUG_MOUSE             (-1)
+#define DEBUG_NVIDIA            (-1)
+#define DEBUG_PLIST             (-1)
+#define DEBUG_PNG               (-1)
+#define DEBUG_SCAN_LEGACY       (-1)
+#define DEBUG_SCAN_LOADER       (-1)
+#define DEBUG_SCAN_TOOL         (-1)
+#define DEBUG_SCR               (-1)
+#define DEBUG_SECURE_BOOT       (-1)
+#define DEBUG_SECURE_HASH       (-1)
+#define DEBUG_SECURE_MENU       (-1)
+#define DEBUG_SECURE_VARS       (-1)
+#define DEBUG_SET               (-1)
+#define DEBUG_SMBIOS            (-1)
+#define DEBUG_SOUND             (-1)
+#define DEBUG_SVG               (-1)
+#define DEBUG_SVG               (-1)
+#define DEBUG_TEXT              (-1)
+#define DEBUG_VEC               (-1)
 
 
 #include <Uefi.h>

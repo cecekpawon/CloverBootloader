@@ -56,13 +56,17 @@
   </dict>
 */
 
-#define DEBUG_CARD_VLIST 1
+//#define DEBUG_CARD_VLIST -1
 
-#if DEBUG_CARD_VLIST == 0
-#define DBG(...)
+#ifndef DEBUG_CARD_VLIST
+#ifndef DEBUG_ALL
+#define DEBUG_CARD_VLIST -1
 #else
-#define DBG(...) DebugLog(DEBUG_CARD_VLIST, __VA_ARGS__)
+#define DEBUG_CARD_VLIST DEBUG_ALL
 #endif
+#endif
+
+#define DBG(...) DebugLog(DEBUG_CARD_VLIST, __VA_ARGS__)
 
 LIST_ENTRY gCardList = INITIALIZE_LIST_HEAD_VARIABLE (gCardList);
 

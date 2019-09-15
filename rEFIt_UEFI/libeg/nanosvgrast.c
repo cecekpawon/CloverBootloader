@@ -38,17 +38,17 @@
 #include "nanosvg.h"
 #include "FloatLib.h"
 
+//#define DEBUG_SVG -1
+
+#ifndef DEBUG_SVG
 #ifndef DEBUG_ALL
-#define DEBUG_SVG 0
+#define DEBUG_SVG -1
 #else
 #define DEBUG_SVG DEBUG_ALL
 #endif
-
-#if DEBUG_SVG == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_SVG, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_SVG, __VA_ARGS__)
 
 
 #define pow(x,n) PowF(x,n)
@@ -71,7 +71,7 @@ static void renderShape(NSVGrasterizer* r,
 
 void DumpFloat (char* s, float* t, int N)
 {
-#if DEBUG_SVG
+#if DEBUG_SVG >= 0
   int i;
   DBG("%a: ", s);
   for(i=0; i<N;i++) {

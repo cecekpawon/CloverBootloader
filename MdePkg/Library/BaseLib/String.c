@@ -43,7 +43,7 @@ StrCpy (
   )
 {
   CHAR16                            *ReturnValue;
-  INTN                              DestMax;
+  //INTN                              DestMax;
 
   //
   // Destination cannot be NULL
@@ -57,7 +57,7 @@ StrCpy (
   ASSERT ((UINTN)(Destination - Source) > StrLen (Source));
   ASSERT ((UINTN)(Source - Destination) > StrLen (Source));
 
-  DestMax = StrLen (Destination);
+  //DestMax = StrLen (Destination);
 
   ReturnValue = Destination;
   while (*Source != 0) {

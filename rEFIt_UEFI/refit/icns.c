@@ -37,17 +37,17 @@
 #include "libegint.h"
 //#include "../include/egemb_icons.h"
 
+//#define DEBUG_ICNS -1
+
+#ifndef DEBUG_ICNS
 #ifndef DEBUG_ALL
-#define DEBUG_ICNS 1
+#define DEBUG_ICNS -1
 #else
 #define DEBUG_ICNS DEBUG_ALL
 #endif
-
-#if DEBUG_ICNS == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_ICNS, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_ICNS, __VA_ARGS__)
 
 //
 // well-known icons

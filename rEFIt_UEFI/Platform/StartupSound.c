@@ -36,18 +36,17 @@ extern HDA_OUTPUTS                     AudioList[20];
 extern UINT8 EmbeddedSound[];
 extern UINTN EmbeddedSoundLength;
 
+//#define DEBUG_SOUND -1
 
+#ifndef DEBUG_SOUND
 #ifndef DEBUG_ALL
-#define DEBUG_SOUND 1
+#define DEBUG_SOUND -1
 #else
 #define DEBUG_SOUND DEBUG_ALL
 #endif
-
-#if DEBUG_SOUND == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_SOUND, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_SOUND, __VA_ARGS__)
 
 
 //EFI_GUID gBootChimeVendorVariableGuid = {0x89D4F995, 0x67E3, 0x4895, { 0x8F, 0x18, 0x45, 0x4B, 0x65, 0x1D, 0x92, 0x15 }};

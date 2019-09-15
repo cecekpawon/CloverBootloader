@@ -9,17 +9,17 @@
 
 #include "ati.h"
 
+//#define DEBUG_ATI -1
+
+#ifndef DEBUG_ATI
 #ifndef DEBUG_ALL
-#define DEBUG_ATI 1
+#define DEBUG_ATI -1
 #else
 #define DEBUG_ATI DEBUG_ALL
 #endif
-
-#if DEBUG_ATI == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_ATI, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_ATI, __VA_ARGS__)
 
 static value_t aty_name;
 static value_t aty_nameparent;

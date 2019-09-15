@@ -36,19 +36,17 @@
 
 #include "Platform.h"
 
+//#define DEBUG_CPU -1
+
+#ifndef DEBUG_CPU
 #ifndef DEBUG_ALL
-#define DEBUG_CPU 1
-//#define DEBUG_PCI 1
+#define DEBUG_CPU -1
 #else
 #define DEBUG_CPU DEBUG_ALL
-//#define DEBUG_PCI DEBUG_ALL
+#endif
 #endif
 
-#if DEBUG_CPU == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_CPU, __VA_ARGS__)  
-#endif
+#define DBG(...) DebugLog(DEBUG_CPU, __VA_ARGS__)
 
 #define VIRTUAL 0
 #if VIRTUAL == 1
@@ -659,7 +657,7 @@ VOID GetCPUProperties (VOID)
     INTN  currdiv = 0;
     UINT64	busFCvtt2n;
     UINT64	tscFCvtt2n;
-    UINT64	busFCvtn2t = 0;
+    //UINT64	busFCvtn2t = 0;
     UINT64	busFrequency		= 0;
     UINT64	cpuFrequency		= 0;
 
@@ -969,7 +967,7 @@ VOID GetCPUProperties (VOID)
         
         busFrequency = DivU64((gCPUStructure.TSCFrequency * 2), ((currcoef * 2) + 1));
         busFCvtt2n = DivU64(((1 * Giga) << 32), busFrequency);
-        busFCvtn2t = DivU64(0xFFFFFFFFFFFFFFFFULL, busFCvtt2n);
+        //busFCvtn2t = DivU64(0xFFFFFFFFFFFFFFFFULL, busFCvtt2n);
         tscFCvtt2n = DivU64(busFCvtt2n * 2, (1 + (2 * currcoef)));
         cpuFrequency = DivU64(((1 * Giga)  << 32), tscFCvtt2n);
         
@@ -989,7 +987,7 @@ VOID GetCPUProperties (VOID)
         
         busFrequency = DivU64(gCPUStructure.TSCFrequency, currcoef);
         busFCvtt2n = DivU64(((1 * Giga) << 32), busFrequency);
-        busFCvtn2t = DivU64(0xFFFFFFFFFFFFFFFFULL, busFCvtt2n);
+        //busFCvtn2t = DivU64(0xFFFFFFFFFFFFFFFFULL, busFCvtt2n);
         tscFCvtt2n = DivU64(busFCvtt2n, currcoef);
         cpuFrequency = DivU64(((1 * Giga)  << 32), tscFCvtt2n);
         
@@ -1138,7 +1136,7 @@ VOID GetCPUProperties (VOID)
   DBG("TSC: %d MHz\n", (INT32)(DivU64x32(gCPUStructure.TSCFrequency, Mega)));
   DBG("PIS: %d MHz\n", (INT32)gCPUStructure.ProcessorInterconnectSpeed);
   DBG("ExternalClock: %d MHz\n", (INT32)(DivU64x32(gCPUStructure.ExternalClock + 499, kilo)));
-  //#if DEBUG_PCI
+  //#if DEBUG_CPU >= 0
   
   //  WaitForKeyPress("waiting for key press...\n");
   //#endif  

@@ -7,17 +7,17 @@
 
 #include "Platform.h"
 
+//#define DEBUG_SET -1
+
+#ifndef DEBUG_SET
 #ifndef DEBUG_ALL
-#define DEBUG_SET 1
+#define DEBUG_SET -1
 #else
 #define DEBUG_SET DEBUG_ALL
 #endif
-
-#if DEBUG_SET == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog (DEBUG_SET, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_SET, __VA_ARGS__)
 
 
 // for saving nvram.plist and it's data
@@ -1031,7 +1031,7 @@ LoadLatestNvramPlist ()
 VOID
 PutNvramPlistToRtVars ()
 {
-  EFI_STATUS Status;
+  //EFI_STATUS Status;
   TagPtr     Tag;
   TagPtr     ValTag;
   INTN       Size, i;
@@ -1039,7 +1039,7 @@ PutNvramPlistToRtVars ()
   VOID       *Value;
   
   if (gNvramDict == NULL) {
-    Status = LoadLatestNvramPlist ();
+    /*Status =*/ LoadLatestNvramPlist ();
     if (gNvramDict == NULL) {
       DBG ("PutNvramPlistToRtVars: nvram.plist not found\n");
       return;

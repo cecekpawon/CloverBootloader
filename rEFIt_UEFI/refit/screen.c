@@ -36,17 +36,17 @@
 
 #include "libegint.h"
 
+//#define DEBUG_SCR -1
+
+#ifndef DEBUG_SCR
 #ifndef DEBUG_ALL
-#define DEBUG_SCR 1
+#define DEBUG_SCR -1
 #else
 #define DEBUG_SCR DEBUG_ALL
 #endif
-
-#if DEBUG_SCR == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_SCR, __VA_ARGS__)	
 #endif
+
+#define DBG(...) DebugLog(DEBUG_SCR, __VA_ARGS__)
 
 // Console defines and variables
 

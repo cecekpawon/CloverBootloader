@@ -41,17 +41,17 @@ CONST INTN SecureMenuDef = 0;
 
 #include <Guid/ImageAuthentication.h>
 
+//#define DEBUG_SECURE_MENU -1
+
+#ifndef DEBUG_SECURE_MENU
 #ifndef DEBUG_ALL
-#define DEBUG_SECURE_MENU 1
+#define DEBUG_SECURE_MENU -1
 #else
 #define DEBUG_SECURE_MENU DEBUG_ALL
 #endif
-
-#if DEBUG_SECURE_MENU == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_SECURE_MENU, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_SECURE_MENU, __VA_ARGS__)
 
 extern BOOLEAN gGuiIsReady;
 extern BOOLEAN gThemeNeedInit;

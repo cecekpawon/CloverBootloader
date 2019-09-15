@@ -3,19 +3,18 @@
 #include "Platform.h"
 #include <Library/NetLib.h>
 
+//#define DEBUG_MAC -1
+
 #ifndef DEBUG_MAC
 #ifndef DEBUG_ALL
-#define DEBUG_MAC 1
+#define DEBUG_MAC -1
 #else
 #define DEBUG_MAC DEBUG_ALL
 #endif
 #endif
 
-#if DEBUG_MAC == 0
-#define DBG(...)
-#else
 #define DBG(...) DebugLog(DEBUG_MAC, __VA_ARGS__)
-#endif
+
 
 extern UINTN                           nLanCards;     // number of LAN cards
 extern UINTN                           nLanPaths;     // number of UEFI LAN

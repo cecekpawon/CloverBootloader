@@ -8,18 +8,15 @@
 
 #include "Platform.h"
 
+#ifndef DEBUG_USB
 #ifndef DEBUG_ALL
-#define DEBUG_USB 0
+#define DEBUG_USB -1
 #else
 #define DEBUG_USB DEBUG_ALL
 #endif
-
-#if DEBUG_USB == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_USB, __VA_ARGS__)
 #endif
 
+#define DBG(...) DebugLog(DEBUG_USB, __VA_ARGS__)
 
 #define PCI_IF_OHCI      0x10
 #define PCI_IF_XHCI     0x30

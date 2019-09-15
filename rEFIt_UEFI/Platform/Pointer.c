@@ -16,17 +16,17 @@
 //#include "Platform.h"
 #include "libegint.h"   //this includes platform.h 
 
+//#define DEBUG_MOUSE -1
+
+#ifndef DEBUG_MOUSE
 #ifndef DEBUG_ALL
-#define DEBUG_MOUSE 1
+#define DEBUG_MOUSE -1
 #else
 #define DEBUG_MOUSE DEBUG_ALL
 #endif
-
-#if DEBUG_MOUSE == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_MOUSE, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_MOUSE, __VA_ARGS__)
 
 extern EFI_AUDIO_IO_PROTOCOL *AudioIo;
 

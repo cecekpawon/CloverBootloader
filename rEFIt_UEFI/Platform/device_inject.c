@@ -10,19 +10,17 @@
 
 #include "Platform.h"
 
+//#define DEBUG_INJECT -1
+
 #ifndef DEBUG_INJECT
 #ifndef DEBUG_ALL
-#define DEBUG_INJECT 1
+#define DEBUG_INJECT 0
 #else
 #define DEBUG_INJECT DEBUG_ALL
 #endif
 #endif
 
-#if DEBUG_INJECT == 0
-#define DBG(...)
-#else
 #define DBG(...) DebugLog(DEBUG_INJECT, __VA_ARGS__)
-#endif
 
 UINT32 devices_number = 1;
 UINT32 builtin_set    = 0;
@@ -344,8 +342,8 @@ VOID devprop_free_string(DevPropString *StringBuf)
 // Ethernet built-in device injection
 BOOLEAN set_eth_props(pci_dt_t *eth_dev)
 {
-#if DEBUG_INJECT
-  CHAR8           *devicepath;
+#if DEBUG_INJECT >= 0
+//  CHAR8           *devicepath;
 #endif
   DevPropDevice   *device = NULL;
   UINT8           builtin = 0x0;
@@ -360,8 +358,8 @@ BOOLEAN set_eth_props(pci_dt_t *eth_dev)
   if (!device_inject_string) {
     device_inject_string = devprop_create_string();
   }
-#if DEBUG_INJECT
-  devicepath = get_pci_dev_path(eth_dev);
+#if DEBUG_INJECT >= 0
+//  devicepath = get_pci_dev_path(eth_dev);
 #endif
   if (eth_dev && !eth_dev->used) {
     device = devprop_add_device_pci(device_inject_string, eth_dev, NULL);
@@ -435,8 +433,8 @@ static UINT16  current_extra_high    = 3200;
 
 BOOLEAN set_usb_props(pci_dt_t *usb_dev)
 {
-#if DEBUG_INJECT
-  CHAR8           *devicepath;
+#if DEBUG_INJECT >= 0
+//  CHAR8           *devicepath;
 #endif
   DevPropDevice   *device = NULL;
   UINT32          fake_devid;
@@ -445,8 +443,8 @@ BOOLEAN set_usb_props(pci_dt_t *usb_dev)
 
   if (!device_inject_string)
     device_inject_string = devprop_create_string();
-#if DEBUG_INJECT
-  devicepath = get_pci_dev_path(usb_dev);
+#if DEBUG_INJECT >= 0
+//  devicepath = get_pci_dev_path(usb_dev);
 #endif
 
   if (usb_dev && !usb_dev->used) {

@@ -2,17 +2,17 @@
 
 #include "Platform.h"
 
+//#define DEBUG_EDID -1
+
+#ifndef DEBUG_EDID
 #ifndef DEBUG_ALL
-#define DEBUG_EDID 1
+#define DEBUG_EDID -1
 #else
 #define DEBUG_EDID DEBUG_ALL
 #endif
-
-#if DEBUG_EDID == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_EDID, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_EDID, __VA_ARGS__)
 
 EFI_STATUS EFIAPI GetEdidImpl(
                               IN  EFI_EDID_OVERRIDE_PROTOCOL          *This,

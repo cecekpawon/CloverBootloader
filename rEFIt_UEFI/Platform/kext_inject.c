@@ -1,14 +1,16 @@
 #include "Platform.h"
 
-#define KEXT_INJECT_DEBUG 0
+//#define KEXT_INJECT_DEBUG -1
 
-#if KEXT_INJECT_DEBUG == 2
-#define DBG(...) MsgLog(__VA_ARGS__)
-#elif KEXT_INJECT_DEBUG == 1
-#define DBG(...)  AsciiPrint(__VA_ARGS__);
+#ifndef KEXT_INJECT_DEBUG
+#ifndef DEBUG_ALL
+#define KEXT_INJECT_DEBUG -1
 #else
-#define DBG(...)
+#define KEXT_INJECT_DEBUG DEBUG_ALL
 #endif
+#endif
+
+#define DBG(...) DebugLog(KEXT_INJECT_DEBUG, __VA_ARGS__)
 
 // runtime debug
 #define DBG_RT(entry, ...)    if ((entry != NULL) && (entry->KernelAndKextPatches != NULL) && entry->KernelAndKextPatches->KPDebug) { AsciiPrint(__VA_ARGS__); }

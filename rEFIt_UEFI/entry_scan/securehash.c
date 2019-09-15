@@ -43,17 +43,17 @@ CONST INTN SecureHashDef = 0;
 
 #include <Guid/ImageAuthentication.h>
 
+//#define DEBUG_SECURE_HASH -1
+
+#ifndef DEBUG_SECURE_HASH
 #ifndef DEBUG_ALL
-#define DEBUG_SECURE_HASH 1
+#define DEBUG_SECURE_HASH -1
 #else
 #define DEBUG_SECURE_HASH DEBUG_ALL
 #endif
-
-#if DEBUG_SECURE_HASH == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_SECURE_HASH, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_SECURE_HASH, __VA_ARGS__)
 
 #define SECDIR_ALIGNMENT_SIZE 8
 #define CERT_SIZE (sizeof(UINT32) + sizeof(UINT16) + sizeof(UINT16))

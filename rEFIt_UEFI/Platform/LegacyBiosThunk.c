@@ -14,17 +14,17 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 
 #include "LegacyBiosThunk.h"
 
+//#define DEBUG_LBTHUNK -1
+
+#ifndef DEBUG_LBTHUNK
 #ifndef DEBUG_ALL
-#define DEBUG_LBTHUNK 0
+#define DEBUG_LBTHUNK -1
 #else
 #define DEBUG_LBTHUNK DEBUG_ALL
 #endif
-
-#if DEBUG_LBTHUNK == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_LBTHUNK, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_LBTHUNK, __VA_ARGS__)
 
 
 #define EFI_CPU_EFLAGS_IF 0x200

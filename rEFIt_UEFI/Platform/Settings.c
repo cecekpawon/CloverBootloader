@@ -8,17 +8,17 @@
 #include "nanosvg.h"
 #include "nvidia.h"
 
+//#define DEBUG_SET -1
+
+#ifndef DEBUG_SET
 #ifndef DEBUG_ALL
-#define DEBUG_SET 1
+#define DEBUG_SET -1
 #else
 #define DEBUG_SET DEBUG_ALL
 #endif
-
-#if DEBUG_SET == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog (DEBUG_SET, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_SET, __VA_ARGS__)
 
 //#define DUMP_KERNEL_KEXT_PATCHES 1
 

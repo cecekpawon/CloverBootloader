@@ -8,19 +8,17 @@
 
 #include "AmlGenerator.h"
 
+//#define DEBUG_AML -1
+
 #ifndef DEBUG_AML
 #ifndef DEBUG_ALL
-#define DEBUG_AML 1
+#define DEBUG_AML -1
 #else
 #define DEBUG_AML DEBUG_ALL
 #endif
 #endif
 
-#if DEBUG_AML==0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_AML, __VA_ARGS__)	
-#endif
+#define DBG(...) DebugLog(DEBUG_AML, __VA_ARGS__)
 
 
 typedef EFI_ACPI_DESCRIPTION_HEADER SSDT_TABLE;

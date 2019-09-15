@@ -64,19 +64,17 @@
 #include "Platform.h"
 #include "gma.h"
 
+//#define DEBUG_GMA -1
+
 #ifndef DEBUG_GMA
 #ifndef DEBUG_ALL
-#define DEBUG_GMA 0
+#define DEBUG_GMA -1
 #else
 #define DEBUG_GMA DEBUG_ALL
 #endif
 #endif
 
-#if DEBUG_GMA == 0
-#define DBG(...)
-#else
 #define DBG(...) DebugLog(DEBUG_GMA, __VA_ARGS__)
-#endif
 
 CHAR16  *CFLFBPath  = L"/System/Library/Extensions/AppleIntelCFLGraphicsFramebuffer.kext";
 

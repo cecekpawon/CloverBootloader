@@ -35,17 +35,17 @@
 
 #include "entry_scan.h"
 
+//#define DEBUG_SCAN_LOADER -1
+
+#ifndef DEBUG_SCAN_LOADER
 #ifndef DEBUG_ALL
-#define DEBUG_SCAN_LOADER 1
+#define DEBUG_SCAN_LOADER -1
 #else
 #define DEBUG_SCAN_LOADER DEBUG_ALL
 #endif
-
-#if DEBUG_SCAN_LOADER == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_SCAN_LOADER, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_SCAN_LOADER, __VA_ARGS__)
 
 //#define DUMP_KERNEL_KEXT_PATCHES 1
 

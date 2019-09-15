@@ -38,17 +38,17 @@
 #include "nanosvg.h"
 #include "FloatLib.h"
 
+//#define DEBUG_SVG -1
+
+#ifndef DEBUG_SVG
 #ifndef DEBUG_ALL
-#define DEBUG_SVG 0
+#define DEBUG_SVG -1
 #else
 #define DEBUG_SVG DEBUG_ALL
 #endif
-
-#if DEBUG_SVG == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_SVG, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_SVG, __VA_ARGS__)
 
 typedef UINTN size_t;
 extern VOID *fontsDB;
@@ -106,7 +106,7 @@ extern BOOLEAN DayLight;
 
 void DumpFloat2 (char* s, float* t, int N)
 {
-#if DEBUG_SVG
+#if DEBUG_SVG >= 0
   int i;
   DBG("%a: ", s);
   for(i=0; i<N;i++)
@@ -3151,16 +3151,16 @@ static void parseImage(NSVGparser* p, const char** dict)
   NSVGpattern *pt = NULL;
   int i;
   UINTN len = 0;
-  float w,h;
+  //float w,h;
   const char *href = NULL;
   UINT8 *tmpData = NULL;
   EG_IMAGE *NewImage = NULL;
 
   for (i = 0; dict[i]; i += 2) {
     if (strcmp(dict[i], "width") == 0) {
-      w = nsvg__parseCoordinate(p, dict[i+1], 0.0f, nsvg__actualWidth(p));
+      /*w =*/ nsvg__parseCoordinate(p, dict[i+1], 0.0f, nsvg__actualWidth(p));
     } else if (strcmp(dict[i], "height") == 0) {
-      h = nsvg__parseCoordinate(p, dict[i+1], 0.0f, nsvg__actualHeight(p));
+      /*h =*/ nsvg__parseCoordinate(p, dict[i+1], 0.0f, nsvg__actualHeight(p));
     } else if (strcmp(dict[i], "xlink:href") == 0) {
       href = dict[i+1];
     } else {

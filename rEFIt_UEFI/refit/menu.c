@@ -44,18 +44,17 @@
 #include "FloatLib.h"
 #include "HdaCodecDump.h"
 
+//#define DEBUG_MENU -1
 
+#ifndef DEBUG_MENU
 #ifndef DEBUG_ALL
-#define DEBUG_MENU 1
+#define DEBUG_MENU -1
 #else
 #define DEBUG_MENU DEBUG_ALL
 #endif
-
-#if DEBUG_MENU == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_MENU, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_MENU, __VA_ARGS__)
 
 //#define PREBOOT_LOG L"EFI\\CLOVER\\misc\\preboot.log"
 #define VBIOS_BIN L"EFI\\CLOVER\\misc\\c0000.bin"

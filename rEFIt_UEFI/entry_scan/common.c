@@ -35,17 +35,17 @@
 
 #include "entry_scan.h"
 
+//#define DEBUG_COMMON_MENU -1
+
+#ifndef DEBUG_COMMON_MENU
 #ifndef DEBUG_ALL
-#define DEBUG_COMMON_MENU 1
+#define DEBUG_COMMON_MENU -1
 #else
 #define DEBUG_COMMON_MENU DEBUG_ALL
 #endif
-
-#if DEBUG_COMMON_MENU == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_COMMON_MENU, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_COMMON_MENU, __VA_ARGS__)
 
 static CHAR16 *BuiltinIconNames[] = {
   /*

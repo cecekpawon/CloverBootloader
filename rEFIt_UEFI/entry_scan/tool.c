@@ -56,17 +56,17 @@
 //#error Unknown Processor Type
 #endif
 
+//#define DEBUG_SCAN_TOOL -1
+
+#ifndef DEBUG_SCAN_TOOL
 #ifndef DEBUG_ALL
-#define DEBUG_SCAN_TOOL 1
+#define DEBUG_SCAN_TOOL -1
 #else
 #define DEBUG_SCAN_TOOL DEBUG_ALL
 #endif
-
-#if DEBUG_SCAN_TOOL == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_SCAN_TOOL, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_SCAN_TOOL, __VA_ARGS__)
 
 extern EMU_VARIABLE_CONTROL_PROTOCOL *gEmuVariableControl;
 

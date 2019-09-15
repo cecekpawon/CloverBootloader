@@ -21,19 +21,17 @@
 #include "Platform.h"
 #include "hda.h"
 
+//#define DEBUG_HDA -1
+
 #ifndef DEBUG_HDA
 #ifndef DEBUG_ALL
-#define DEBUG_HDA 1
+#define DEBUG_HDA -1
 #else
 #define DEBUG_HDA DEBUG_ALL
 #endif
 #endif
 
-#if DEBUG_HDA == 0
-#define DBG(...)
-#else
 #define DBG(...) DebugLog(DEBUG_HDA, __VA_ARGS__)
-#endif
 
 // HDA layout-id device injection by dmazar
 

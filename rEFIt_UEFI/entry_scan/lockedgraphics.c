@@ -34,17 +34,17 @@
 
 #include "entry_scan.h"
 
+//#define DEBUG_LOCK_BOOT_SCREEN -1
+
+#ifndef DEBUG_LOCK_BOOT_SCREEN
 #ifndef DEBUG_ALL
-#define DEBUG_LOCK_BOOT_SCREEN 1
+#define DEBUG_LOCK_BOOT_SCREEN -1
 #else
 #define DEBUG_LOCK_BOOT_SCREEN DEBUG_ALL
 #endif
-
-#if DEBUG_LOCK_BOOT_SCREEN == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_LOCK_BOOT_SCREEN, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_LOCK_BOOT_SCREEN, __VA_ARGS__)
 
 // Each time a new graphics protocol is opened,
 // lock it and save the information here

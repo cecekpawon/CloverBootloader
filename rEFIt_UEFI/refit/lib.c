@@ -36,17 +36,17 @@
 
 #include "Platform.h"
 
+//#define DEBUG_LIB -1
+
+#ifndef DEBUG_LIB
 #ifndef DEBUG_ALL
-#define DEBUG_LIB 1
+#define DEBUG_LIB -1
 #else
 #define DEBUG_LIB DEBUG_ALL
 #endif
-
-#if DEBUG_LIB == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_LIB, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_LIB, __VA_ARGS__)
 
 // variables
 

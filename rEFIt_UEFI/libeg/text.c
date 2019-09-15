@@ -41,17 +41,17 @@
 //#define FONT_CELL_WIDTH (7)
 //#define FONT_CELL_HEIGHT (12)
 
+//#define DEBUG_TEXT -1
+
+#ifndef DEBUG_TEXT
 #ifndef DEBUG_ALL
-#define DEBUG_TEXT 0
+#define DEBUG_TEXT -1
 #else
 #define DEBUG_TEXT DEBUG_ALL
 #endif
-
-#if DEBUG_TEXT == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_TEXT, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_TEXT, __VA_ARGS__)
 
 
 EG_IMAGE *FontImage = NULL;

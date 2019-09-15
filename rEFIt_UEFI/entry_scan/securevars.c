@@ -47,17 +47,17 @@ CONST INTN SecureVarsDef = 0;
 #include <openssl/pem.h>
 #include <openssl/sha.h>
 
+//#define DEBUG_SECURE_VARS -1
+
+#ifndef DEBUG_SECURE_VARS
 #ifndef DEBUG_ALL
-#define DEBUG_SECURE_VARS 1
+#define DEBUG_SECURE_VARS -1
 #else
 #define DEBUG_SECURE_VARS DEBUG_ALL
 #endif
-
-#if DEBUG_SECURE_VARS == 0
-#define DBG(...)
-#else
-#define DBG(...) DebugLog(DEBUG_SECURE_VARS, __VA_ARGS__)
 #endif
+
+#define DBG(...) DebugLog(DEBUG_SECURE_VARS, __VA_ARGS__)
 
 #define SET_DATABASE_ATTRIBUTES (EFI_VARIABLE_NON_VOLATILE | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_RUNTIME_ACCESS | \
                                  EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS | EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS)

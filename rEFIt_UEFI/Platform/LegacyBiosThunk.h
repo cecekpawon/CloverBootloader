@@ -47,6 +47,8 @@ Abstract:
 #include <Library/GenericBdsLib.h>
 #include <Library/IoLib.h>
 
+#include "Platform.h"
+
 #include <IndustryStandard/Pci.h>
 
 #define EFI_SEGMENT(_Adr)     (UINT16) ((UINT16) (((UINTN) (_Adr)) >> 4) & 0xf000)
