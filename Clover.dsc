@@ -355,7 +355,10 @@
   #EmbeddedPkg/Universal/MmcDxe/MmcDxe.inf
   #OsxMmcDxe/MmcDxe.inf
   FileSystems/FatPkg/EnhancedFatDxe/Fat.inf
+# Note: Original source only have support for X64.
+#!if $(ARCH) == X64
   FileSystems/ApfsDriverLoader/ApfsDriverLoader.inf
+#!endif
   # FS from grub
 !ifndef NO_GRUB_DRIVERS
   FileSystems/GrubFS/src/EXFAT.inf

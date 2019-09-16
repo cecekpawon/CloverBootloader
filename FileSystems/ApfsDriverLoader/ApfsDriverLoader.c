@@ -66,7 +66,7 @@ ApfsBlockChecksumCalculate (
   Check1 = ModValue - ((Sum1 + Sum2) % ModValue);
   Check2 = ModValue - ((Sum1 + Check1) % ModValue);
 
-  return (Check2 << 32) | Check1;
+  return (UINT64)((Check2 << 32) | Check1);
 }
 
 //
@@ -80,14 +80,14 @@ ApfsBlockChecksumVerify (
   )
 {
   UINT64  NewChecksum;
-  UINT64  *CurrChecksum = (UINT64 *) Data;
+  UINT64  CurrChecksum = (UINT64)(*Data);
 
   NewChecksum = ApfsBlockChecksumCalculate (
     (UINT32 *) (Data + sizeof (UINT64)),
     DataSize - sizeof (UINT64)
     );
 
-  return NewChecksum == *CurrChecksum;
+  return (BOOLEAN)(NewChecksum == CurrChecksum);
 }
 
 EFI_STATUS
