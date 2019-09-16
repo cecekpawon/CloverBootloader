@@ -1941,52 +1941,52 @@ NOOPT_VS2017_AARCH64_DLINK_FLAGS   = /NOLOGO /NODEFAULTLIB /IGNORE:4001 /OPT:REF
 # GCC Common
 ####################################################################################
 
-*_*_*_OBJCOPY_PATH                 = echo
-*_*_*_OBJCOPY_FLAGS                = objcopy not needed for
-*_*_*_SYMRENAME_PATH               = echo
-*_*_*_SYMRENAME_FLAGS              = Symbol renaming not needed for
-DEBUG_*_*_OBJCOPY_ADDDEBUGFLAG     = --add-gnu-debuglink=$(DEBUG_DIR)/$(MODULE_NAME).debug
-RELEASE_*_*_OBJCOPY_ADDDEBUGFLAG   =
-*_*_*_DTC_FLAGS                    = -H epapr
-*_*_*_DTCPP_PATH                   = DEF(DTCPP_BIN)
-*_*_*_DTC_PATH                     = DEF(DTC_BIN)
+*_*_*_OBJCOPY_PATH                  = echo
+*_*_*_OBJCOPY_FLAGS                 = objcopy not needed for
+*_*_*_SYMRENAME_PATH                = echo
+*_*_*_SYMRENAME_FLAGS               = Symbol renaming not needed for
+DEBUG_*_*_OBJCOPY_ADDDEBUGFLAG      = --add-gnu-debuglink=$(DEBUG_DIR)/$(MODULE_NAME).debug
+RELEASE_*_*_OBJCOPY_ADDDEBUGFLAG    =
+*_*_*_DTC_FLAGS                     = -H epapr
+*_*_*_DTCPP_PATH                    = DEF(DTCPP_BIN)
+*_*_*_DTC_PATH                      = DEF(DTC_BIN)
 
-DEFINE GCC_ALL_CC_FLAGS            = -g -fshort-wchar -fno-strict-aliasing -Wall -Werror -Wno-array-bounds -include AutoGen.h
-DEFINE GCC_IA32_CC_FLAGS           = DEF(GCC_ALL_CC_FLAGS) -m32 -malign-double -freorder-blocks -freorder-blocks-and-partition -O2 -mno-stack-arg-probe
-DEFINE GCC_X64_CC_FLAGS            = DEF(GCC_ALL_CC_FLAGS) -mno-red-zone -Wno-address -mno-stack-arg-probe
-DEFINE GCC_ARM_CC_FLAGS            = DEF(GCC_ALL_CC_FLAGS) -mword-relocations -mlittle-endian -mabi=aapcs -mapcs -fno-short-enums -save-temps -fsigned-char -ffunction-sections -fdata-sections -fomit-frame-pointer -Wno-address -mthumb -mfloat-abi=soft
-DEFINE GCC_AARCH64_CC_FLAGS        = DEF(GCC_ALL_CC_FLAGS) -mcmodel=large -mlittle-endian -fno-short-enums -save-temps -fverbose-asm -fsigned-char  -ffunction-sections -fdata-sections -fomit-frame-pointer -fno-builtin -Wno-address
-DEFINE GCC_DLINK_FLAGS_COMMON      = -nostdlib -Wl,--pie
-DEFINE GCC_IA32_X64_DLINK_COMMON   = DEF(GCC_DLINK_FLAGS_COMMON),--gc-sections
-DEFINE GCC_ARM_AARCH64_DLINK_COMMON= -nostdlib -Wl,-Ttext=0x0,--emit-relocs,--gc-sections,-u,$(IMAGE_ENTRY_POINT),-e,$(IMAGE_ENTRY_POINT),-Map,$(DEST_DIR_DEBUG)/$(BASE_NAME).map
-DEFINE GCC_ARM_DLINK_FLAGS         = DEF(GCC_ARM_AARCH64_DLINK_COMMON),-Ttext=0x0
-DEFINE GCC_AARCH64_DLINK_FLAGS     = DEF(GCC_ARM_AARCH64_DLINK_COMMON),-z,common-page-size=0x20
-DEFINE GCC_IA32_X64_ASLDLINK_FLAGS = DEF(GCC_IA32_X64_DLINK_COMMON),--entry,_ReferenceAcpiTable,-u,$(IMAGE_ENTRY_POINT)
-DEFINE GCC_ARM_ASLDLINK_FLAGS      = DEF(GCC_ARM_DLINK_FLAGS),--entry,_ReferenceAcpiTable,-u,$(IMAGE_ENTRY_POINT)
-DEFINE GCC_AARCH64_ASLDLINK_FLAGS  = DEF(GCC_AARCH64_DLINK_FLAGS),--entry,_ReferenceAcpiTable,-u,$(IMAGE_ENTRY_POINT)
+DEFINE GCC_ALL_CC_FLAGS             = -g -fno-common -fno-builtin -fshort-wchar -fno-strict-aliasing -ffunction-sections -fdata-sections -Wall -Werror -Wno-array-bounds -Wno-address -include AutoGen.h
+DEFINE GCC_IA32_CC_FLAGS            = DEF(GCC_ALL_CC_FLAGS) -m32 -malign-double -freorder-blocks -freorder-blocks-and-partition -O2 -mno-stack-arg-probe
+DEFINE GCC_X64_CC_FLAGS             = DEF(GCC_ALL_CC_FLAGS) -mno-red-zone -mno-stack-arg-probe
+DEFINE GCC_ARM_CC_FLAGS             = DEF(GCC_ALL_CC_FLAGS) -mword-relocations -mlittle-endian -mabi=aapcs -mapcs -fno-short-enums -save-temps -fsigned-char -fomit-frame-pointer -Wno-address -mthumb -mfloat-abi=soft
+DEFINE GCC_AARCH64_CC_FLAGS         = DEF(GCC_ALL_CC_FLAGS) -mcmodel=large -mlittle-endian -fno-short-enums -save-temps -fverbose-asm -fsigned-char -fomit-frame-pointer
+DEFINE GCC_DLINK_FLAGS_COMMON       = -nostdlib -Wl,--pie
+DEFINE GCC_IA32_X64_DLINK_COMMON    = DEF(GCC_DLINK_FLAGS_COMMON),--gc-sections
+DEFINE GCC_ARM_AARCH64_DLINK_COMMON = DEF(GCC_DLINK_FLAGS_COMMON),-Ttext=0x0,--emit-relocs,--gc-sections,-u,$(IMAGE_ENTRY_POINT),-e,$(IMAGE_ENTRY_POINT),-Map,$(DEST_DIR_DEBUG)/$(BASE_NAME).map
+DEFINE GCC_ARM_DLINK_FLAGS          = DEF(GCC_ARM_AARCH64_DLINK_COMMON),-Ttext=0x0
+DEFINE GCC_AARCH64_DLINK_FLAGS      = DEF(GCC_ARM_AARCH64_DLINK_COMMON),-z,common-page-size=0x20
+DEFINE GCC_IA32_X64_ASLDLINK_FLAGS  = DEF(GCC_IA32_X64_DLINK_COMMON),--entry,_ReferenceAcpiTable,-u,$(IMAGE_ENTRY_POINT)
+DEFINE GCC_ARM_ASLDLINK_FLAGS       = DEF(GCC_ARM_DLINK_FLAGS),--entry,_ReferenceAcpiTable,-u,$(IMAGE_ENTRY_POINT)
+DEFINE GCC_AARCH64_ASLDLINK_FLAGS   = DEF(GCC_AARCH64_DLINK_FLAGS),--entry,_ReferenceAcpiTable,-u,$(IMAGE_ENTRY_POINT)
 
-DEFINE GCC_IA32_X64_DLINK_FLAGS    = DEF(GCC_IA32_X64_DLINK_COMMON),--entry,_$(IMAGE_ENTRY_POINT),--file-alignment,0x20,--section-alignment,0x20,-Map,$(DEST_DIR_DEBUG)/$(BASE_NAME).map
+DEFINE GCC_IA32_X64_DLINK_FLAGS     = DEF(GCC_IA32_X64_DLINK_COMMON),--entry,_$(IMAGE_ENTRY_POINT),--file-alignment,0x20,--section-alignment,0x20,-Map,$(DEST_DIR_DEBUG)/$(BASE_NAME).map
 
-DEFINE GCC_ASM_FLAGS               = -c -x assembler -imacros $(DEST_DIR_DEBUG)/AutoGen.h
-DEFINE GCC_PP_FLAGS                = -E -x assembler-with-cpp -include $(DEST_DIR_DEBUG)/AutoGen.h
-DEFINE GCC_VFRPP_FLAGS             = -x c -E -P -DVFRCOMPILE --include $(DEST_DIR_DEBUG)/$(MODULE_NAME)StrDefs.h
-DEFINE GCC_ASLPP_FLAGS             = -x c -E -include AutoGen.h
-DEFINE GCC_ASLCC_FLAGS             = -x c -fno-lto
-DEFINE GCC_WINDRES_FLAGS           = -J rc -O coff
-DEFINE GCC_DTCPP_FLAGS             = -E -x assembler-with-cpp -imacros $(DEST_DIR_DEBUG)/AutoGen.h -nostdinc -undef
-DEFINE GCC_IA32_RC_FLAGS           = -I binary -O elf32-i386        -B i386 --rename-section .data=.hii
-DEFINE GCC_X64_RC_FLAGS            = -I binary -O elf64-x86-64      -B i386 --rename-section .data=.hii
-DEFINE GCC_ARM_RC_FLAGS            = -I binary -O elf32-littlearm     -B arm     --rename-section .data=.hii
-DEFINE GCC_AARCH64_RC_FLAGS        = -I binary -O elf64-littleaarch64 -B aarch64 --rename-section .data=.hii
+DEFINE GCC_ASM_FLAGS                = -c -x assembler -imacros $(DEST_DIR_DEBUG)/AutoGen.h
+DEFINE GCC_PP_FLAGS                 = -E -x assembler-with-cpp -include $(DEST_DIR_DEBUG)/AutoGen.h
+DEFINE GCC_VFRPP_FLAGS              = -x c -E -P -DVFRCOMPILE --include $(DEST_DIR_DEBUG)/$(MODULE_NAME)StrDefs.h
+DEFINE GCC_ASLPP_FLAGS              = -x c -E -include AutoGen.h
+DEFINE GCC_ASLCC_FLAGS              = -x c -fno-lto
+DEFINE GCC_WINDRES_FLAGS            = -J rc -O coff
+DEFINE GCC_DTCPP_FLAGS              = -E -x assembler-with-cpp -imacros $(DEST_DIR_DEBUG)/AutoGen.h -nostdinc -undef
+DEFINE GCC_IA32_RC_FLAGS            = -I binary -O elf32-i386        -B i386 --rename-section .data=.hii
+DEFINE GCC_X64_RC_FLAGS             = -I binary -O elf64-x86-64      -B i386 --rename-section .data=.hii
+DEFINE GCC_ARM_RC_FLAGS             = -I binary -O elf32-littlearm     -B arm     --rename-section .data=.hii
+DEFINE GCC_AARCH64_RC_FLAGS         = -I binary -O elf64-littleaarch64 -B aarch64 --rename-section .data=.hii
 
 #
 # 4.X
 #
 
-DEFINE GCC49_ALL_CC_FLAGS            = -g -fshort-wchar -fno-builtin -fno-strict-aliasing -Wall -Werror -Wno-array-bounds -ffunction-sections -fdata-sections -include AutoGen.h -fno-common -DSTRING_ARRAY_NAME=$(BASE_NAME)Strings -fno-asynchronous-unwind-tables
-DEFINE GCC49_IA32_CC_FLAGS           = DEF(GCC49_ALL_CC_FLAGS) -m32 -march=i586 -malign-double -fno-stack-protector -D EFI32 -Wno-address -Wno-unused-but-set-variable -Wno-unused-const-variable -Os -flto -DUSING_LTO
-DEFINE GCC49_X64_CC_FLAGS            = DEF(GCC49_ALL_CC_FLAGS) -m64 -fno-stack-protector "-DEFIAPI=__attribute__((ms_abi))" -maccumulate-outgoing-args -mno-red-zone -Wno-address -mcmodel=small -fpie -Wno-unused-but-set-variable -mabi=ms -Wno-unused-const-variable -Os -flto -DUSING_LTO
-DEFINE GCC49_IA32_X64_DLINK_COMMON   = -nostdlib -Wl,-n,-q,--gc-sections,--script=$(EDK_TOOLS_PATH)/Scripts/gcc4.9-ld-script
+DEFINE GCC49_ALL_CC_FLAGS            = DEF(GCC_ALL_CC_FLAGS) -DSTRING_ARRAY_NAME=$(BASE_NAME)Strings -fno-asynchronous-unwind-tables
+DEFINE GCC49_IA32_CC_FLAGS           = DEF(GCC49_ALL_CC_FLAGS) -m32 -march=i586 -malign-double -fno-stack-protector -D EFI32
+DEFINE GCC49_X64_CC_FLAGS            = DEF(GCC49_ALL_CC_FLAGS) -m64 -fno-stack-protector "-DEFIAPI=__attribute__((ms_abi))" -maccumulate-outgoing-args -mno-red-zone -mcmodel=small -fpie -mabi=ms
+DEFINE GCC49_IA32_X64_DLINK_COMMON   = DEF(GCC_DLINK_FLAGS_COMMON),-n,-q,--gc-sections,--script=$(EDK_TOOLS_PATH)/Scripts/gcc4.9-ld-script
 DEFINE GCC49_IA32_X64_ASLDLINK_FLAGS = DEF(GCC49_IA32_X64_DLINK_COMMON),--entry,ReferenceAcpiTable,-u,ReferenceAcpiTable
 DEFINE GCC49_IA32_X64_DLINK_FLAGS    = DEF(GCC49_IA32_X64_DLINK_COMMON),--entry,$(IMAGE_ENTRY_POINT),-u,$(IMAGE_ENTRY_POINT),-Map,$(DEST_DIR_DEBUG)/$(BASE_NAME).map
 DEFINE GCC49_X64_DLINK_FLAGS         = DEF(GCC49_IA32_X64_DLINK_FLAGS),-melf_x86_64,--oformat=elf64-x86-64,-pie
@@ -2012,14 +2012,10 @@ DEFINE GCC49_AARCH64_RELEASE_FLAGS   = -Wno-unused-but-set-variable
 
 DEFINE GCC53_IA32_CC_FLAGS           = DEF(GCC49_IA32_CC_FLAGS)
 DEFINE GCC53_X64_CC_FLAGS            = DEF(GCC49_X64_CC_FLAGS)
-DEFINE GCC53_IA32_X64_DLINK_COMMON   = -nostdlib -Wl,-n,-q,--gc-sections,-z,common-page-size=0x40,--defsym=PECOFF_HEADER_SIZE=0x280,--script=$(EDK_TOOLS_PATH)/Scripts/GccBase.lds
-
+DEFINE GCC53_IA32_X64_DLINK_COMMON   = DEF(GCC_DLINK_FLAGS_COMMON),-n,-q,--gc-sections,-z,common-page-size=0x40,--defsym=PECOFF_HEADER_SIZE=0x280,--script=$(EDK_TOOLS_PATH)/Scripts/GccBase.lds
 DEFINE GCC53_IA32_X64_ASLDLINK_FLAGS = DEF(GCC53_IA32_X64_DLINK_COMMON),--entry,ReferenceAcpiTable,-u,ReferenceAcpiTable
-
 DEFINE GCC53_IA32_X64_DLINK_FLAGS    = DEF(GCC53_IA32_X64_DLINK_COMMON),--entry,$(IMAGE_ENTRY_POINT),-u,$(IMAGE_ENTRY_POINT),-Map,$(DEST_DIR_DEBUG)/$(BASE_NAME).map
-
-DEFINE GCC53_X64_DLINK_FLAGS         = DEF(GCC53_IA32_X64_DLINK_FLAGS),-melf_x86_64,--oformat=elf64-x86-64,-pie
-
+DEFINE GCC53_X64_DLINK_FLAGS         = DEF(GCC53_IA32_X64_DLINK_FLAGS),-melf_x86_64,--oformat=elf64-x86-64
 DEFINE GCC53_ASM_FLAGS               = DEF(GCC49_ASM_FLAGS)
 
 ####################################################################################
@@ -2028,45 +2024,37 @@ DEFINE GCC53_ASM_FLAGS               = DEF(GCC49_ASM_FLAGS)
 #           PE/COFF binaries using GCC 4.9.
 #
 ####################################################################################
-*_GCC49_*_*_FAMILY               = GCC
-*_GCC49_*_*_BUILDRULEORDER    = nasm S s
+*_GCC49_*_*_FAMILY                = GCC
+*_GCC49_*_*_BUILDRULEORDER        = nasm S s
 
-*_GCC49_*_MAKE_PATH                    = make
-#*_GCC49_*_MAKE_PATH                    = DEF(GCC49_IA32_PREFIX)make
+*_GCC49_*_MAKE_PATH               = make
+#*_GCC49_*_MAKE_PATH               = DEF(GCC49_IA32_PREFIX)make
 
-*_GCC49_*_*_DLL                        = ENV(GCC49_DLL)
-
-*_GCC49_X64_GCCLINK_PREFIX             = -Wl,
-
-*_GCC49_IA32_GCCLINK_PREFIX            = -Wl,
-
-*_GCC49_AARCH64_GCCLINK_PREFIX         = -Wl,
-
-*_GCC49_ARM_GCCLINK_PREFIX             = -Wl,
+*_GCC49_*_*_DLL                   = ENV(GCC49_DLL)
+*_GCC49_X64_GCCLINK_PREFIX        = -Wl,
+*_GCC49_IA32_GCCLINK_PREFIX       = -Wl,
+*_GCC49_AARCH64_GCCLINK_PREFIX    = -Wl,
+*_GCC49_ARM_GCCLINK_PREFIX        = -Wl,
 
 
-*_GCC49_*_ASL_PATH                     = DEF(UNIX_IASL_BIN)
+*_GCC49_*_ASL_PATH                = DEF(UNIX_IASL_BIN)
 
-*_GCC49_*_PP_FLAGS                     = DEF(GCC_PP_FLAGS)
-*_GCC49_*_ASLPP_FLAGS                  = DEF(GCC_ASLPP_FLAGS)
-*_GCC49_*_ASLCC_FLAGS                  = DEF(GCC_ASLCC_FLAGS)
-*_GCC49_*_VFRPP_FLAGS                  = DEF(GCC_VFRPP_FLAGS)
-*_GCC49_*_APP_FLAGS                    =
-*_GCC49_*_ASL_FLAGS                    = DEF(IASL_FLAGS)
-*_GCC49_*_ASL_OUTFLAGS                 = DEF(IASL_OUTFLAGS)
-#*_GCC49_*_NASM_PATH               = ENV(HOME)/src/opt/local/bin/nasm
-*_GCC49_*_NASM_PATH                = ENV(NASM_PREFIX)nasm
+*_GCC49_*_PP_FLAGS                = DEF(GCC_PP_FLAGS)
+*_GCC49_*_ASLPP_FLAGS             = DEF(GCC_ASLPP_FLAGS)
+*_GCC49_*_ASLCC_FLAGS             = DEF(GCC_ASLCC_FLAGS)
+*_GCC49_*_VFRPP_FLAGS             = DEF(GCC_VFRPP_FLAGS)
+*_GCC49_*_APP_FLAGS               =
+*_GCC49_*_ASL_FLAGS               = DEF(IASL_FLAGS)
+*_GCC49_*_ASL_OUTFLAGS            = DEF(IASL_OUTFLAGS)
+*_GCC49_*_NASM_PATH               = ENV(NASM_PREFIX)nasm
 
 ##################
 # GCC49 IA32 definitions
 ##################
 *_GCC49_IA32_OBJCOPY_PATH         = DEF(GCC49_IA32_PREFIX)objcopy
 *_GCC49_IA32_CC_PATH              = DEF(GCC49_IA32_PREFIX)gcc
-#*_GCC49_IA32_SLINK_PATH           = DEF(GCC49_IA32_PREFIX)ar
 *_GCC49_IA32_SLINK_PATH           = DEF(GCC49_IA32_PREFIX)gcc-ar
-#*_GCC49_IA32_DLINK_PATH           = DEF(GCC49_IA32_PREFIX)ld
 *_GCC49_IA32_DLINK_PATH           = DEF(GCC49_IA32_PREFIX)gcc
-#*_GCC49_IA32_ASLDLINK_PATH        = DEF(GCC49_IA32_PREFIX)ld
 *_GCC49_IA32_ASLDLINK_PATH        = DEF(GCC49_IA32_PREFIX)gcc
 *_GCC49_IA32_ASM_PATH             = DEF(GCC49_IA32_PREFIX)gcc
 *_GCC49_IA32_PP_PATH              = DEF(GCC49_IA32_PREFIX)gcc
@@ -2076,26 +2064,25 @@ DEFINE GCC53_ASM_FLAGS               = DEF(GCC49_ASM_FLAGS)
 *_GCC49_IA32_RC_PATH              = DEF(GCC49_IA32_PREFIX)objcopy
 
 *_GCC49_IA32_ASLCC_FLAGS          = DEF(GCC_ASLCC_FLAGS) -m32
-#*_GCC49_IA32_ASLDLINK_FLAGS       = DEF(GCC49_IA32_X64_ASLDLINK_FLAGS) -m elf_i386 
 *_GCC49_IA32_ASLDLINK_FLAGS       = DEF(GCC49_IA32_X64_ASLDLINK_FLAGS),-m,elf_i386
 *_GCC49_IA32_ASM_FLAGS            = DEF(GCC49_ASM_FLAGS) -m32 -march=i386
 *_GCC49_IA32_CC_FLAGS             = DEF(GCC49_IA32_CC_FLAGS) ENV(GCC49_IA32_EXTRA_CC_FLAGS)
-*_GCC49_IA32_DLINK_FLAGS          = DEF(GCC49_IA32_X64_DLINK_FLAGS),-m,elf_i386,--oformat=elf32-i386 DEF(GCC49_IA32_CC_FLAGS) 
-#*_GCC49_IA32_DLINK2_FLAGS         = DEF(GCC49_IA32_DLINK2_FLAGS)
+*_GCC49_IA32_DLINK_FLAGS          = DEF(GCC49_IA32_X64_DLINK_FLAGS),-m,elf_i386,--oformat=elf32-i386 DEF(GCC49_IA32_CC_FLAGS)
 *_GCC49_IA32_RC_FLAGS             = DEF(GCC_IA32_RC_FLAGS)
-*_GCC49_IA32_OBJCOPY_FLAGS        = 
+*_GCC49_IA32_OBJCOPY_FLAGS        =
 *_GCC49_IA32_NASM_FLAGS           = -f elf32
+
+  DEBUG_GCC49_IA32_CC_FLAGS       = DEF(GCC49_IA32_CC_FLAGS) -Os
+RELEASE_GCC49_IA32_CC_FLAGS       = DEF(GCC49_IA32_CC_FLAGS) -Os -Wno-unused-but-set-variable -Wno-unused-const-variable
+  NOOPT_GCC49_IA32_CC_FLAGS       = DEF(GCC49_IA32_CC_FLAGS) -O0
 
 ##################
 # GCC49 X64 definitions
 ##################
 *_GCC49_X64_OBJCOPY_PATH         = DEF(GCC49_X64_PREFIX)objcopy
 *_GCC49_X64_CC_PATH              = DEF(GCC49_X64_PREFIX)gcc
-#*_GCC49_X64_SLINK_PATH           = DEF(GCC49_X64_PREFIX)ar
 *_GCC49_X64_SLINK_PATH           = DEF(GCC49_X64_PREFIX)gcc-ar
-#*_GCC49_X64_DLINK_PATH           = DEF(GCC49_X64_PREFIX)ld
 *_GCC49_X64_DLINK_PATH           = DEF(GCC49_X64_PREFIX)gcc
-#*_GCC49_X64_ASLDLINK_PATH        = DEF(GCC49_X64_PREFIX)ld
 *_GCC49_X64_ASLDLINK_PATH        = DEF(GCC49_X64_PREFIX)gcc
 *_GCC49_X64_ASM_PATH             = DEF(GCC49_X64_PREFIX)gcc
 *_GCC49_X64_PP_PATH              = DEF(GCC49_X64_PREFIX)gcc
@@ -2105,17 +2092,17 @@ DEFINE GCC53_ASM_FLAGS               = DEF(GCC49_ASM_FLAGS)
 *_GCC49_X64_RC_PATH              = DEF(GCC49_X64_PREFIX)objcopy
 
 *_GCC49_X64_ASLCC_FLAGS          = DEF(GCC_ASLCC_FLAGS) -m64
-#*_GCC49_X64_ASLDLINK_FLAGS       = DEF(GCC49_IA32_X64_ASLDLINK_FLAGS) -m elf_x86_64
 *_GCC49_X64_ASLDLINK_FLAGS       = DEF(GCC49_IA32_X64_ASLDLINK_FLAGS),-m,elf_x86_64
 *_GCC49_X64_ASM_FLAGS            = DEF(GCC49_ASM_FLAGS) -m64
-#*_GCC49_X64_CC_FLAGS             = DEF(GCC49_X64_CC_FLAGS)
 *_GCC49_X64_CC_FLAGS             = DEF(GCC49_X64_CC_FLAGS) ENV(GCC49_X64_EXTRA_CC_FLAGS)
-#*_GCC49_X64_DLINK_FLAGS          = DEF(GCC49_X64_DLINK_FLAGS)
 *_GCC49_X64_DLINK_FLAGS          = DEF(GCC49_X64_DLINK_FLAGS) DEF(GCC49_X64_CC_FLAGS) ENV(GCC49_X64_EXTRA_CC_FLAGS)
-#*_GCC49_X64_DLINK2_FLAGS         = DEF(GCC49_X64_DLINK2_FLAGS)
 *_GCC49_X64_RC_FLAGS             = DEF(GCC_X64_RC_FLAGS)
-*_GCC49_X64_OBJCOPY_FLAGS        = 
+*_GCC49_X64_OBJCOPY_FLAGS        =
 *_GCC49_X64_NASM_FLAGS           = -f elf64
+
+  DEBUG_GCC49_X64_CC_FLAGS       = DEF(GCC49_X64_CC_FLAGS) -Os
+RELEASE_GCC49_X64_CC_FLAGS       = DEF(GCC49_X64_CC_FLAGS) -Os -Wno-unused-but-set-variable -Wno-unused-const-variable
+  NOOPT_GCC49_X64_CC_FLAGS       = DEF(GCC49_X64_CC_FLAGS) -O0
 
 
 ####################################################################################
@@ -2124,29 +2111,28 @@ DEFINE GCC53_ASM_FLAGS               = DEF(GCC49_ASM_FLAGS)
 #           PE/COFF binaries using GCC 5.3.
 #
 ####################################################################################
-*_GCC53_*_*_FAMILY               = GCC
-*_GCC53_*_*_BUILDRULEORDER       = nasm S s
+*_GCC53_*_*_FAMILY                = GCC
+*_GCC53_*_*_BUILDRULEORDER        = nasm S s
 
-*_GCC53_*_MAKE_PATH                    = make
-#*_GCC53_*_MAKE_PATH                    = DEF(GCC53_IA32_PREFIX)make
+*_GCC53_*_MAKE_PATH               = make
+#*_GCC53_*_MAKE_PATH               = DEF(GCC53_IA32_PREFIX)make
 
-*_GCC53_*_*_DLL                        = ENV(GCC53_DLL)
+*_GCC53_*_*_DLL                   = ENV(GCC53_DLL)
 
-*_GCC53_X64_GCCLINK_PREFIX             = -Wl,
+*_GCC53_X64_GCCLINK_PREFIX        = -Wl,
 
-*_GCC53_IA32_GCCLINK_PREFIX            = -Wl,
+*_GCC53_IA32_GCCLINK_PREFIX       = -Wl,
 
-*_GCC53_*_ASL_PATH                     = DEF(UNIX_IASL_BIN)
-#*_GCC53_*_NASM_PATH               = ENV(HOME)/src/opt/local/bin/nasm
-*_GCC53_*_NASM_PATH                = ENV(NASM_PREFIX)nasm
+*_GCC53_*_ASL_PATH                = DEF(UNIX_IASL_BIN)
+*_GCC53_*_NASM_PATH               = ENV(NASM_PREFIX)nasm
 
-*_GCC53_*_PP_FLAGS                     = DEF(GCC_PP_FLAGS)
-*_GCC53_*_ASLPP_FLAGS                  = DEF(GCC_ASLPP_FLAGS)
-*_GCC53_*_ASLCC_FLAGS                  = DEF(GCC_ASLCC_FLAGS)
-*_GCC53_*_VFRPP_FLAGS                  = DEF(GCC_VFRPP_FLAGS)
-*_GCC53_*_APP_FLAGS                    =
-*_GCC53_*_ASL_FLAGS                    = DEF(IASL_FLAGS)
-*_GCC53_*_ASL_OUTFLAGS                 = DEF(IASL_OUTFLAGS)
+*_GCC53_*_PP_FLAGS                = DEF(GCC_PP_FLAGS)
+*_GCC53_*_ASLPP_FLAGS             = DEF(GCC_ASLPP_FLAGS)
+*_GCC53_*_ASLCC_FLAGS             = DEF(GCC_ASLCC_FLAGS)
+*_GCC53_*_VFRPP_FLAGS             = DEF(GCC_VFRPP_FLAGS)
+*_GCC53_*_APP_FLAGS               =
+*_GCC53_*_ASL_FLAGS               = DEF(IASL_FLAGS)
+*_GCC53_*_ASL_OUTFLAGS            = DEF(IASL_OUTFLAGS)
 
 ##################
 # GCC53 IA32 definitions
@@ -2172,29 +2158,47 @@ DEFINE GCC53_ASM_FLAGS               = DEF(GCC49_ASM_FLAGS)
 *_GCC53_IA32_OBJCOPY_FLAGS        =
 *_GCC53_IA32_NASM_FLAGS           = -f elf32
 
+  DEBUG_GCC53_IA32_CC_FLAGS       = DEF(GCC53_IA32_CC_FLAGS) -flto -Os
+  DEBUG_GCC53_IA32_DLINK_FLAGS    = DEF(GCC53_IA32_X64_DLINK_FLAGS) -flto -Os -Wl,-m,elf_i386,--oformat=elf32-i386
+
+RELEASE_GCC53_IA32_CC_FLAGS       = DEF(GCC53_IA32_CC_FLAGS) -flto -Os -Wno-unused-but-set-variable -Wno-unused-const-variable
+RELEASE_GCC53_IA32_DLINK_FLAGS    = DEF(GCC53_IA32_X64_DLINK_FLAGS) -flto -Os -Wl,-m,elf_i386,--oformat=elf32-i386
+
+  NOOPT_GCC53_IA32_CC_FLAGS       = DEF(GCC53_IA32_CC_FLAGS) -O0
+  NOOPT_GCC53_IA32_DLINK_FLAGS    = DEF(GCC53_IA32_X64_DLINK_FLAGS) -Wl,-m,elf_i386,--oformat=elf32-i386 -O0
+
 ##################
 # GCC53 X64 definitions
 ##################
-*_GCC53_X64_OBJCOPY_PATH         = DEF(GCC53_X64_PREFIX)objcopy
-*_GCC53_X64_CC_PATH              = DEF(GCC53_X64_PREFIX)gcc
-*_GCC53_X64_SLINK_PATH           = DEF(GCC53_X64_PREFIX)gcc-ar
-*_GCC53_X64_DLINK_PATH           = DEF(GCC53_X64_PREFIX)gcc
-*_GCC53_X64_ASLDLINK_PATH        = DEF(GCC53_X64_PREFIX)gcc
-*_GCC53_X64_ASM_PATH             = DEF(GCC53_X64_PREFIX)gcc
-*_GCC53_X64_PP_PATH              = DEF(GCC53_X64_PREFIX)gcc
-*_GCC53_X64_VFRPP_PATH           = DEF(GCC53_X64_PREFIX)gcc
-*_GCC53_X64_ASLCC_PATH           = DEF(GCC53_X64_PREFIX)gcc
-*_GCC53_X64_ASLPP_PATH           = DEF(GCC53_X64_PREFIX)gcc
-*_GCC53_X64_RC_PATH              = DEF(GCC53_X64_PREFIX)objcopy
+*_GCC53_X64_OBJCOPY_PATH          = DEF(GCC53_X64_PREFIX)objcopy
+*_GCC53_X64_CC_PATH               = DEF(GCC53_X64_PREFIX)gcc
+*_GCC53_X64_SLINK_PATH            = DEF(GCC53_X64_PREFIX)gcc-ar
+*_GCC53_X64_DLINK_PATH            = DEF(GCC53_X64_PREFIX)gcc
+*_GCC53_X64_ASLDLINK_PATH         = DEF(GCC53_X64_PREFIX)gcc
+*_GCC53_X64_ASM_PATH              = DEF(GCC53_X64_PREFIX)gcc
+*_GCC53_X64_PP_PATH               = DEF(GCC53_X64_PREFIX)gcc
+*_GCC53_X64_VFRPP_PATH            = DEF(GCC53_X64_PREFIX)gcc
+*_GCC53_X64_ASLCC_PATH            = DEF(GCC53_X64_PREFIX)gcc
+*_GCC53_X64_ASLPP_PATH            = DEF(GCC53_X64_PREFIX)gcc
+*_GCC53_X64_RC_PATH               = DEF(GCC53_X64_PREFIX)objcopy
 
-*_GCC53_X64_ASLCC_FLAGS          = DEF(GCC_ASLCC_FLAGS) -m64
-*_GCC53_X64_ASLDLINK_FLAGS       = DEF(GCC53_IA32_X64_ASLDLINK_FLAGS),-m,elf_x86_64
-*_GCC53_X64_ASM_FLAGS            = DEF(GCC53_ASM_FLAGS) -m64
-*_GCC53_X64_CC_FLAGS             = DEF(GCC53_X64_CC_FLAGS) ENV(GCC53_X64_EXTRA_CC_FLAGS)
-*_GCC53_X64_DLINK_FLAGS          = DEF(GCC53_X64_DLINK_FLAGS) DEF(GCC53_X64_CC_FLAGS) ENV(GCC53_X64_EXTRA_CC_FLAGS)
-*_GCC53_X64_RC_FLAGS             = DEF(GCC_X64_RC_FLAGS)
-*_GCC53_X64_OBJCOPY_FLAGS        =
-*_GCC53_X64_NASM_FLAGS           = -f elf64
+*_GCC53_X64_ASLCC_FLAGS           = DEF(GCC_ASLCC_FLAGS) -m64
+*_GCC53_X64_ASLDLINK_FLAGS        = DEF(GCC53_IA32_X64_ASLDLINK_FLAGS),-m,elf_x86_64
+*_GCC53_X64_ASM_FLAGS             = DEF(GCC53_ASM_FLAGS) -m64
+*_GCC53_X64_CC_FLAGS              = DEF(GCC53_X64_CC_FLAGS) ENV(GCC53_X64_EXTRA_CC_FLAGS)
+*_GCC53_X64_DLINK_FLAGS           = DEF(GCC53_X64_DLINK_FLAGS) DEF(GCC53_X64_CC_FLAGS) ENV(GCC53_X64_EXTRA_CC_FLAGS)
+*_GCC53_X64_RC_FLAGS              = DEF(GCC_X64_RC_FLAGS)
+*_GCC53_X64_OBJCOPY_FLAGS         =
+*_GCC53_X64_NASM_FLAGS            = -f elf64
+
+  DEBUG_GCC53_X64_CC_FLAGS        = DEF(GCC53_X64_CC_FLAGS) -flto -DUSING_LTO -Os
+  DEBUG_GCC53_X64_DLINK_FLAGS     = DEF(GCC53_X64_DLINK_FLAGS) -flto -Os
+
+RELEASE_GCC53_X64_CC_FLAGS        = DEF(GCC53_X64_CC_FLAGS) -flto -DUSING_LTO -Os -Wno-unused-but-set-variable -Wno-unused-const-variable
+RELEASE_GCC53_X64_DLINK_FLAGS     = DEF(GCC53_X64_DLINK_FLAGS) -flto -Os
+
+  NOOPT_GCC53_X64_CC_FLAGS        = DEF(GCC53_X64_CC_FLAGS) -O0
+  NOOPT_GCC53_X64_DLINK_FLAGS     = DEF(GCC53_X64_DLINK_FLAGS) -O0
 
 
 #
