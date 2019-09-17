@@ -1056,7 +1056,7 @@ VOID findCPU(UINT8* dsdt, UINT32 length)
     for (i=0; i<15; i++) {
       acpi_cpu_name[i] = AllocateZeroPool(5);
       AsciiSPrint(acpi_cpu_name[i], 5, "CPU%1x", i);
-      acpi_cpu_processor_id[i] = i;
+      acpi_cpu_processor_id[i] = (UINT8)i;
     }
   }
   return;
